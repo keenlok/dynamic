@@ -32,6 +32,7 @@ describe('dynamic.io', function(){
       var basename = '';
       // For some reason cant reference the method in index.js
       sio.setupNamespace(/.*first/, function(nsp) {
+        console.log("What is nsp", nsp);
         expect(nsp.fullname()).to.be(basename + '/first');
         --total || done();
       });

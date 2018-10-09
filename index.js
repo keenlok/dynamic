@@ -49,131 +49,129 @@ function matchPattern(pattern, string) {
  * @param options
  * @returns {DynamicServer}
  */
-class DynamicServer extends IOServer {
-
-  constructor (server, options) {
-    super(server, options);
-    if (!(this instanceof DynamicServer)) {
-      return new DynamicServer(server, options);
-    }
-
-    if ('object' == typeof server && !server.listen) {
-      options = server;
-    }
-    options = options || {};
-
-    this._cleanupTimer = null;
-    this._cleanupTime = null;
-    this._namespaceNames = {};
-    this._namespacePatterns = [];
-
-    this._mainHost = makePattern(options.host || '*');
-
-    this._defaultRetirement = options.retirement || 10000;
-
-    this._publicStatus = options.publicStatus || false;
-
-    // IOServer.apply(this, arguments);
-    console.log(this.nsps);
-    this.of(name, server, options);
+function DynamicServer (server, options) {
+  if (!(this instanceof DynamicServer)) {
+    return new DynamicServer(server, options);
   }
 
+  if ('object' == typeof server && !server.listen) {
+    options = server;
+  }
+  options = options || {};
 
-  /**
-   * This is the setup for initializing dynamic namespaces.
-   *
-   * @param name
-   * @param fn
-   */
-  setupNamespace (name, fn) {
-    let pattern = makePattern(name);
-    if (pattern instanceof RegExp) {
-      this._namespacePatterns.push({pattern: pattern, setup: fn});
-    } else {
-      this._namespaceNames[name] = fn;
-    }
+  this._cleanupTimer = null;
+  this._cleanupTime = null;
+  this._namespaceNames = {};
+  this._namespacePatterns = [];
 
-    // If there is a matching namespace already, then set it up.
-    for (let j in this.nsps) {
-      if (this.nsps.hasOwnProperty(j)) {
-        let nsp = this.nsps[j];
-        let match;
-        if (!nsp.setupDone && !!(match = matchPattern(pattern, j))) {
-          nsp.setupDone = -1;
-          if (false === fn.apply(this, [nsp, match])) {
-            nsp.setupDone = 0;
-          } else {
-            nsp.setupDone = 1;
-          }
+  this._mainHost = makePattern(options.host || '*');
+
+  this._defaultRetirement = options.retirement || 10000;
+
+  this._publicStatus = options.publicStatus || false;
+
+  IOServer.apply(this, arguments);
+  console.log(this.nsps);
+}
+
+util.inherits(DynamicServer, IOServer);
+
+
+/**
+ * This is the setup for initializing dynamic namespaces.
+ *
+ * @param name
+ * @param fn
+ */
+DynamicServer.prototype.setupNamespace =  function (name, fn) {
+  let pattern = makePattern(name);
+  if (pattern instanceof RegExp) {
+    this._namespacePatterns.push({pattern: pattern, setup: fn});
+  } else {
+    this._namespaceNames[name] = fn;
+  }
+
+  // If there is a matching namespace already, then set it up.
+  for (let j in this.nsps) {
+    if (this.nsps.hasOwnProperty(j)) {
+      let nsp = this.nsps[j];
+      let match;
+      if (!nsp.setupDone && !!(match = matchPattern(pattern, j))) {
+        nsp.setupDone = -1;
+        if (false === fn.apply(this, [nsp, match])) {
+          nsp.setupDone = 0;
+        } else {
+          nsp.setupDone = 1;
         }
       }
     }
   }
+}
 
-  onConnection (conn) {
-    let host = this.getHost(conn);
-    if (!host || matchPattern(this._mainHost, host)) {
-      host = null;
-    }
-    let client = new DynamicClient(this, conn, host);
-    client.connect('/');
-    return this;
+DynamicServer.prototype.onConnection = function (conn) {
+  let host = this.getHost(conn);
+  if (!host || matchPattern(this._mainHost, host)) {
+    host = null;
   }
+  let client = new DynamicClient(this, conn, host);
+  client.connect('/');
+  return this;
+}
 
 // Allow users to override this in order to normalize hostnames.
-  getHost (conn) {
-    return conn.request.headers.host;
-  }
+DynamicServer.prototype.getHost = function (conn) {
+  return conn.request.headers.host;
+}
 
 // Do the work of initializing a namespace when it is needed.
-  initializeNamespace (name, host, auto) {
-    let fullName = fullNamespaceName(name, host);
-    let setup;
-    let match;
+DynamicServer.prototype.initializeNamespace = function (name, host, auto) {
+  let fullName = fullNamespaceName(name, host);
+  let setup;
+  let match;
 
-    if (this._namespaceNames !== undefined) {
-      // && this._namespaceNames.hasOwnProperty(fullName)) {
-      setup = this._namespaceNames[fullName];
-      match = {
-        '0': fullName,
-        index: 0,
-        input: fullName
-      };
-    } else {
-      for (let i = this._namespacePatterns.length - 1; i >= 0; i--) {
-        match = matchPattern(this._namespacePatterns[i].pattern, fullName);
-        if (match) {
-          setup = this._namespacePatterns[i].setup;
-          break;
-        }
+  if (this._namespaceNames !== undefined) {
+    // && this._namespaceNames.hasOwnProperty(fullName)) {
+    setup = this._namespaceNames[fullName];
+    match = {
+      '0': fullName,
+      index: 0,
+      input: fullName
+    };
+  } else {
+    for (let i = this._namespacePatterns.length - 1; i >= 0; i--) {
+      match = matchPattern(this._namespacePatterns[i].pattern, fullName);
+      if (match) {
+        setup = this._namespacePatterns[i].setup;
+        break;
       }
     }
-
-    if (auto && !setup) {
-      return null;
-    }
-
-    let nsp = new DynamicNamespace(this, name, host);
-
-    if (auto) {
-      nsp.retirement = this._defaultRetirement;
-    }
-    this.nsps[fullName] = nsp;
-    if (setup) {
-      nsp.setupDone = -1;
-      if (false === setup.apply(this, [nsp, match])) {
-        delete this.nsps[fullName];
-        return null;
-      } else {
-        nsp.setupDone = 1;
-      }
-    }
-    return nsp;
   }
+
+  if (auto && !setup) {
+    return null;
+  }
+
+  let nsp = new DynamicNamespace(this, name, host);
+
+  if (auto) {
+    nsp.retirement = this._defaultRetirement;
+  }
+  this.nsps[fullName] = nsp;
+  if (setup) {
+    nsp.setupDone = -1;
+    if (false === setup.apply(this, [nsp, match])) {
+      delete this.nsps[fullName];
+      return null;
+    } else {
+      nsp.setupDone = 1;
+    }
+  }
+  return nsp;
+}
 
 // When namespaces are emptied, they ask the server to poll
 // them back for expiration.
-  requestCleanupAfter (delay) {
+DynamicServer.prototype.requestCleanupAfter = function (delay) {
     delay = Math.max(0, delay || 0);
 
     if (!(delay < Infinity)) {
@@ -201,149 +199,151 @@ class DynamicServer extends IOServer {
 
 // When doing cleanup, we scan all namespaces for their
 // expiration dates.
-  cleanupExpiredNamespaces () {
-    let earliestUnexpired = Infinity;
-    let now = +(new Date);
-    for (let j in this.nsps) {
-      if (this.nsps.hasOwnProperty(j)) {
-        let nsp = this.nsps[j];
-        let expiration = nsp._expiration();
-        if (expiration <= now) {
-          nsp.expire(true);
-          delete this.nsps[j];
-        } else {
-          earliestUnexpired = Math.min(earliestUnexpired, expiration);
-        }
-      }
-    }
-    this.requestCleanupAfter(earliestUnexpired - now);
-  }
-
-  /**
-   * Override "of" to handle an optional 'host' argument an "fn" of "true", which indicates a
-   * request for an automatically created namespace.
-   *
-   * @param name
-   * @param host
-   * @param fn
-   * @override
-   */
-  of (name, host, fn) {
-    if (fn == null && typeof(host) == 'function') {
-      fn = host;
-      host = null;
-    }
-    if (!/^\//.test(name)) {
-      // Insert a leading slash if needed.
-      name = '/' + name;
-    }
-
-    // Add a leading hostname for lookup.
-    let fullname = fullNamespaceName(name, host);
-    // if (!this.nsps[fullname]) {
-    if (typeof this.nsps === undefined) {
-      debug('initializing namespace %s', fullname);
-      let nsp = this.initializeNamespace(name, host, fn === true);
-      if (nsp == null) {
-        debug('unrecognized namespace', fullname);
-        return;
-      }
-    }
-    if (typeof(fn) == 'function') {
-      this.nsps[fullname].on('connect', fn);
-    }
-    return this.nsps[fullname];
-  }
-
-  attachServe (srv) {
-    debug('attaching web request handler');
-    let prefix = this._path;
-    let clientUrl = prefix + '/socket.io.js';
-    let statusUrl = prefix + '/status';
-    let evs = srv.listeners('request').slice(0);
-    let self = this;
-    srv.removeAllListeners('request');
-    srv.on('request', (req, res) => {
-      if (0 == req.url.indexOf(clientUrl)) {
-        self.serve(req, res);
-      } else if (self._publicStatus && 0 == req.url.indexOf(statusUrl)) {
-        self.serveStatus(req, res);
+DynamicServer.prototype.cleanupExpiredNamespaces = function () {
+  let earliestUnexpired = Infinity;
+  let now = +(new Date);
+  for (let j in this.nsps) {
+    if (this.nsps.hasOwnProperty(j)) {
+      let nsp = this.nsps[j];
+      let expiration = nsp._expiration();
+      if (expiration <= now) {
+        nsp.expire(true);
+        delete this.nsps[j];
       } else {
-        for (let i = 0; i < evs.length; i++) {
-          evs[i].call(srv, req, res);
-        }
+        earliestUnexpired = Math.min(earliestUnexpired, expiration);
       }
-    });
+    }
+  }
+  this.requestCleanupAfter(earliestUnexpired - now);
+}
+
+/**
+ * Override "of" to handle an optional 'host' argument an "fn" of "true", which indicates a
+ * request for an automatically created namespace.
+ *
+ * @param name
+ * @param host
+ * @param fn
+ * @override
+ */
+DynamicServer.prototype.of = function (name, host, fn) {
+  if (fn == null && typeof(host) == 'function') {
+    fn = host;
+    host = null;
+  }
+  if (!/^\//.test(name)) {
+    // Insert a leading slash if needed.
+    name = '/' + name;
   }
 
-  serveStatus (req, res) {
-    debug('serve status');
-    let match = '*';
-    if (!matchPattern(this._mainHost, req.headers.host)) {
-      match = req.headers.host;
+  // Add a leading hostname for lookup.
+  let fullname = fullNamespaceName(name, host);
+  if (!this.nsps[fullname]) {
+    debug('initializing namespace %s', fullname);
+    let nsp = this.initializeNamespace(name, host, fn === true);
+    if (nsp == null) {
+      debug('unrecognized namespace', fullname);
+      return;
     }
+  }
+  if (typeof(fn) == 'function') {
+    this.nsps[fullname].on('connect', fn);
+  }
+  // console.log(this.nsps[fullname]);
+  // this.nsps[fullname] = {};
+  // this.nsps[fullname].fns = []; // The new socket.io is checking for this property
+  return this.nsps[fullname];
+}
 
-    let html = ['<!doctype html>', '<html>', '<body>', '<pre>'];
-    html.push('<a href="status">Refresh</a> active namespaces on ' + match, '');
-    let sorted = [];
-    for (let j in this.nsps) {
-      if (this.nsps.hasOwnProperty(j)) {
-        let nsp = this.nsps[j];
-        if (match != '*' && nsp.host != match) {
-          continue;
-        }
-        sorted.push(j);
+DynamicServer.prototype.attachServe = function(srv) {
+  debug('attaching web request handler');
+  let prefix = this._path;
+  let clientUrl = prefix + '/socket.io.js';
+  let statusUrl = prefix + '/status';
+  let evs = srv.listeners('request').slice(0);
+  let self = this;
+  srv.removeAllListeners('request');
+  srv.on('request', (req, res) => {
+    if (0 == req.url.indexOf(clientUrl)) {
+      self.serve(req, res);
+    } else if (self._publicStatus && 0 == req.url.indexOf(statusUrl)) {
+      self.serveStatus(req, res);
+    } else {
+      for (let i = 0; i < evs.length; i++) {
+        evs[i].call(srv, req, res);
       }
     }
-    // Sorts by
-    sorted.sort((a, b) => {
-      if (a == b) {
-        return 0;
-      }
-      a = a.replace(/\//g, '\uffff');
-      b = b.replace(/\//g, '\uffff');
+  });
+}
 
-      if (a < b) {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
+DynamicServer.prototype.serveStatus = function (req, res) {
+  debug('serve status');
+  let match = '*';
+  if (!matchPattern(this._mainHost, req.headers.host)) {
+    match = req.headers.host;
+  }
 
-    let now = +(new Date);
-    for (let i = 0; i < sorted.length; i++) {
-      let nsp = this.nsps[sorted[i]];
-      html.push(match == '*' ? nsp.fullName() : nsp.name);
-      if (nsp.sockets.length == 0) {
-        let remaining = nsp._expiration() - now;
-        let expinfo = '';
-        if (remaining < Infinity) {
-          expinfo = '; expires ' + remaining / 1000 + 's';
-        }
-        html.push('  (no sockets' + expinfo + ')');
-      } else for (var k = 0; k < nsp.sockets.length; ++k) {
-        let socket = nsp.sockets[k];
-        let clientdesc = '';
-        if (socket.request.connection.remoteAddress) {
-          clientdesc += ' from ' + socket.request.connection.remoteAddress;
-        }
-        let roomdesc = '';
-        if (socket.rooms.length > 1) {
-          for (var m = 0; m < socket.rooms.length; ++m) {
-            if (socket.rooms[m] != socket.client.id) {
-              roomdesc += ' ' + socket.rooms[m];
-            }
+  let html = ['<!doctype html>', '<html>', '<body>', '<pre>'];
+  html.push('<a href="status">Refresh</a> active namespaces on ' + match, '');
+  let sorted = [];
+  for (let j in this.nsps) {
+    if (this.nsps.hasOwnProperty(j)) {
+      let nsp = this.nsps[j];
+      if (match != '*' && nsp.host != match) {
+        continue;
+      }
+      sorted.push(j);
+    }
+  }
+  // Sorts by
+  sorted.sort((a, b) => {
+    if (a == b) {
+      return 0;
+    }
+    a = a.replace(/\//g, '\uffff');
+    b = b.replace(/\//g, '\uffff');
+
+    if (a < b) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+
+  let now = +(new Date);
+  for (let i = 0; i < sorted.length; i++) {
+    let nsp = this.nsps[sorted[i]];
+    html.push(match == '*' ? nsp.fullName() : nsp.name);
+    if (nsp.sockets.length == 0) {
+      let remaining = nsp._expiration() - now;
+      let expinfo = '';
+      if (remaining < Infinity) {
+        expinfo = '; expires ' + remaining / 1000 + 's';
+      }
+      html.push('  (no sockets' + expinfo + ')');
+    } else for (var k = 0; k < nsp.sockets.length; ++k) {
+      let socket = nsp.sockets[k];
+      let clientdesc = '';
+      if (socket.request.connection.remoteAddress) {
+        clientdesc += ' from ' + socket.request.connection.remoteAddress;
+      }
+      let roomdesc = '';
+      if (socket.rooms.length > 1) {
+        for (var m = 0; m < socket.rooms.length; ++m) {
+          if (socket.rooms[m] != socket.client.id) {
+            roomdesc += ' ' + socket.rooms[m];
           }
         }
-        html.push(' socket ' + socket.id + clientdesc + roomdesc);
       }
-      html.push('');
+      html.push(' socket ' + socket.id + clientdesc + roomdesc);
     }
-    res.setHeader('Content-Type', 'text/html');
-    res.writeHead(200);
-    res.end(html.join('\n'));
+    html.push('');
   }
+  res.setHeader('Content-Type', 'text/html');
+  res.writeHead(200);
+  res.end(html.join('\n'));
 }
+
 
 
 /**
