@@ -71,7 +71,7 @@ function DynamicServer (server, options) {
   this._publicStatus = options.publicStatus || false;
 
   IOServer.apply(this, arguments);
-  console.log(this.nsps);
+  // console.log(this.nsps);
 }
 
 util.inherits(DynamicServer, IOServer);
@@ -249,9 +249,6 @@ DynamicServer.prototype.of = function (name, host, fn) {
   if (typeof(fn) == 'function') {
     this.nsps[fullname].on('connect', fn);
   }
-  // console.log(this.nsps[fullname]);
-  // this.nsps[fullname] = {};
-  // this.nsps[fullname].fns = []; // The new socket.io is checking for this property
   return this.nsps[fullname];
 }
 
@@ -466,7 +463,7 @@ class DynamicNamespace extends IONameSpace {
    */
   add () {
     this._expirationTime = Infinity;
-    return super.add.apply(args);
+    return super.add.apply(this, arguments);
   }
 
 }

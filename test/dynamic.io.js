@@ -17,10 +17,16 @@ function client(srv, nsp, opts){
     url = srv + (nsp || '');
   } else {
     var addr = srv.address();
+    if (addr.address === "::") {
+      addr.address = '['+addr.address+']';
+    }
     if (!addr) addr = srv.listen().address();
     url = 'ws://' + addr.address + ':' + addr.port + (nsp || '');
+    console.log("the srv url is", url);
   }
-  return ioc(url, opts);
+  let clien = ioc(url, opts);
+  console.log("what is the ioclient", clien);
+  return clien;
 }
 
 describe('dynamic.io', function(){
@@ -32,10 +38,11 @@ describe('dynamic.io', function(){
       var basename = '';
       // For some reason cant reference the method in index.js
       sio.setupNamespace(/.*first/, function(nsp) {
-        console.log("What is nsp", nsp);
+        console.log("It comes here", nsp.fullname());
         expect(nsp.fullname()).to.be(basename + '/first');
         --total || done();
       });
+      console.log("For comparison ", sio);
       srv.listen(function() {
         var addr = srv.address();
         basename = '//' + addr.address + ':' + addr.port;
