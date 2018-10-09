@@ -1,0 +1,32 @@
+{
+  "name": "dynamic.io",
+  "version": "1.0.0",
+  "description": "socket.io server subclass for dynamic hosts and namespaces",
+  "keywords": [
+    "dynamic",
+    "virtual",
+    "host",
+    "namespace",
+    "realtime",
+    "socket",
+    "io"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PencilCode/dynamic.io"
+  },
+  "dependencies": {
+    "debug": "^4.0.1",
+    "socket.io": "^2.1.1",
+    "socket.io-adapter": "^1.1.1",
+    "socket.io-parser": "^3.2.0"
+  },
+  "devDependencies": {
+    "expect.js": "0.3.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "socket.io-client": "^2.1.1",
+    "superagent": "^3.8.3",
+    "supertest": "^3.3.0"
+  }
+}
