@@ -15,8 +15,13 @@
     "type": "git",
     "url": "git://github.com/PencilCode/dynamic.io"
   },
+  "scripts": {
+    "tests": "node_modules/.bin/mocha --reporter spec --slow 200ms --bail",
+    "debug": "DEBUG=dynamic.io* node_modules/.bin/mocha --reporter spec --slow 200ms --bail"
+  },
   "dependencies": {
     "debug": "^4.0.1",
+    "should": "^13.2.3",
     "socket.io": "^2.1.1",
     "socket.io-adapter": "^1.1.1",
     "socket.io-parser": "^3.2.0"

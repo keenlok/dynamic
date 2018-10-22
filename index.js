@@ -108,7 +108,7 @@ DynamicServer.prototype.setupNamespace =  function (name, fn) {
   }
 }
 
-DynamicServer.prototype.onConnection = function (conn) {
+DynamicServer.prototype.onconnection = function (conn) {
   let host = this.getHost(conn);
   if (!host || matchPattern(this._mainHost, host)) {
     host = null;
@@ -129,7 +129,7 @@ DynamicServer.prototype.initializeNamespace = function (name, host, auto) {
   let setup;
   let match;
 
-  if (this._namespaceNames !== undefined) {
+  if (this._namespaceNames.hasOwnProperty(fullName)) {
     // && this._namespaceNames.hasOwnProperty(fullName)) {
     setup = this._namespaceNames[fullName];
     match = {
@@ -438,7 +438,7 @@ class DynamicNamespace extends IONameSpace {
    *
    * @returns {string}
    */
-  fullname () {
+  fullName () {
     return fullNamespaceName(this.name, this.host);
   }
 

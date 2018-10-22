@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1c123862-bd4e-4631-bef6-0fb24a26b9ce" name="Default Changelist" comment="" />
+    <list default="true" id="1c123862-bd4e-4631-bef6-0fb24a26b9ce" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/dynamic.io.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/dynamic.io.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -15,54 +23,70 @@
     <session id="-1812382078">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.1" value="2" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.1" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="18" />
-          <entry key="json" value="1" />
-          <entry key="ts" value="4" />
+          <entry key="js" value="72" />
+          <entry key="json" value="3" />
+          <entry key="md" value="3" />
+          <entry key="ts" value="5" />
+          <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="18" />
-          <entry key="TypeScript" value="4" />
+          <entry key="JSON" value="3" />
+          <entry key="JavaScript" value="72" />
+          <entry key="Markdown" value="3" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="TypeScript" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="6253" />
-          <entry key="json" value="10" />
+          <entry key="js" value="7411" />
+          <entry key="json" value="79" />
+          <entry key="md" value="47" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="10" />
-          <entry key="JavaScript" value="6253" />
+          <entry key="JSON" value="79" />
+          <entry key="JavaScript" value="7411" />
+          <entry key="Markdown" value="47" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
-      <usages-collector id="statistics.vcs.git.usages" />
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.merge" value="1" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4516129">
+    <splitter split-orientation="horizontal" split-proportion="0.55972695">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="182">
-                  <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="4" />
-                  <folding>
-                    <element signature="n#!!block;n#requestCleanupAfter#0;n#DynamicServer#0" />
-                  </folding>
+                <state relative-caret-position="144">
+                  <caret line="229" column="2" selection-start-line="229" selection-start-column="2" selection-end-line="229" selection-end-column="2" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/socket.io-client/lib/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="179">
+                  <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
                 </state>
               </provider>
             </entry>
@@ -70,8 +94,44 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
-                  <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+                <state relative-caret-position="165">
+                  <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/namespace.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="193">
+                  <caret line="90" selection-start-line="90" selection-end-line="90" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="3220">
+                  <caret line="253" selection-start-line="253" selection-end-line="253" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/client.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="148">
+                  <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/socket.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="6626">
+                  <caret line="448" column="11" selection-start-line="448" selection-start-column="11" selection-end-line="448" selection-end-column="11" />
                 </state>
               </provider>
             </entry>
@@ -79,8 +139,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/package.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+                <state relative-caret-position="285">
+                  <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
                 </state>
               </provider>
             </entry>
@@ -89,22 +149,18 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test/dynamic.io.js">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/test/test.io.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="191">
-                  <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+                <state relative-caret-position="198">
+                  <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="429">
-                  <caret line="282" column="19" selection-start-line="282" selection-start-column="19" selection-end-line="282" selection-end-column="19" />
-                </state>
-              </provider>
+          <file pinned="false" current-in-tab="false">
+            <entry file="mock://events.js">
+              <provider selected="true" editor-type-id="vmFileEditor" />
             </entry>
           </file>
         </leaf>
@@ -122,6 +178,7 @@
     <findStrings>
       <find>exports</find>
       <find>to</find>
+      <find>reques</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,12 +187,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/DynamicClient.js" />
         <option value="$PROJECT_DIR$/dynamicclient.js" />
+        <option value="$PROJECT_DIR$/resutl.txt" />
         <option value="$PROJECT_DIR$/test.js" />
+        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/test/dynamic.io.js" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/test/test.io.js" />
       </list>
     </option>
   </component>
@@ -170,6 +230,24 @@
             <path>
               <item name="Dynamic" type="b2602c69:ProjectViewProjectNode" />
               <item name="Dynamic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dynamic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dynamic" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dynamic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dynamic" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="socket.io" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Dynamic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Dynamic" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="socket.io" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Dynamic" type="b2602c69:ProjectViewProjectNode" />
@@ -215,11 +293,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Mocha.dynamic.io.hosts.should add //host:port when host is true">
-    <configuration name="test.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test.js" working-dir="$PROJECT_DIR$">
+  <component name="RunManager" selected="Mocha.test 1.should add //host:port when host is true">
+    <configuration name="debug" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="debug" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
-    <configuration name="dynamic.io" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+    <configuration name="base socket.io" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <working-directory>$PROJECT_DIR$</working-directory>
@@ -227,9 +312,9 @@
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>SUITE</test-kind>
-      <test-file>$PROJECT_DIR$/test/dynamic.io.js</test-file>
+      <test-file>$PROJECT_DIR$/test/socket.io.js</test-file>
       <test-names>
-        <name value="dynamic.io" />
+        <name value="base socket.io" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -249,16 +334,52 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="test 1" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>SUITE</test-kind>
+      <test-file>$PROJECT_DIR$/test/test.io.js</test-file>
+      <test-names>
+        <name value="test 1" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="test 1.should add //host:port when host is true" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs>
+        <env name="DEBUG" value="dynamic.io:*" />
+      </envs>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/test.io.js</test-file>
+      <test-names>
+        <name value="test 1" />
+        <name value="should add //host:port when host is true" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Node.js.test.js" />
-      <item itemvalue="Mocha.dynamic.io" />
       <item itemvalue="Mocha.dynamic.io.hosts.should add //host:port when host is true" />
+      <item itemvalue="Mocha.base socket.io" />
+      <item itemvalue="Mocha.test 1.should add //host:port when host is true" />
+      <item itemvalue="Mocha.test 1" />
+      <item itemvalue="npm.debug" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Mocha.test 1.should add //host:port when host is true" />
+        <item itemvalue="Mocha.test 1" />
         <item itemvalue="Mocha.dynamic.io.hosts.should add //host:port when host is true" />
-        <item itemvalue="Mocha.dynamic.io" />
-        <item itemvalue="Node.js.test.js" />
+        <item itemvalue="npm.debug" />
+        <item itemvalue="Mocha.base socket.io" />
       </list>
     </recent_temporary>
   </component>
@@ -274,44 +395,45 @@
       <updated>1538454895867</updated>
       <workItem from="1538454897585" duration="3324000" />
       <workItem from="1538463208507" duration="21529000" />
-      <workItem from="1539050411389" duration="507000" />
+      <workItem from="1539050411389" duration="13695000" />
+      <workItem from="1539946470667" duration="11073000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 18h 49m 36s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 13h 35m 10s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 18h 50m 04s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 13h 38m 01s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 18h 54m 40s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 13h 40m 26s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 18h 55m 17s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 13h 43m 18s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 18h 55m 40s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 14h 15m 24s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 19h 01m 22s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 14h 16m 07s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 19h 02m 43s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 14h 38m 43s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 19h 02m 58s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 14h 40m 55s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.02 at 19h 03m 06s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 14h 42m 16s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="dynamic_io_hosts_should_add___host_port_when_host_is_true - 2018.10.09 at 10h 03m 56s.xml">
-      <configuration name="dynamic.io.hosts.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="test_1_should_add___host_port_when_host_is_true - 2018.10.22 at 14h 44m 03s.xml">
+      <configuration name="test 1.should add //host:port when host is true" configurationId="mocha-javascript-test-runner" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25360000" />
+    <option name="totallyTimeSpent" value="49621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
@@ -321,15 +443,15 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4997367" weight="0.32953367" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4997367" weight="0.41283423" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4997367" weight="0.27914438" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4997367" visible="true" weight="0.486631" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32941177" />
       <window_info anchor="bottom" id="Inspection Results" order="9" weight="0.32953367" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32941177" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.27058825" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5002633" side_tool="true" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -339,6 +461,32 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -346,27 +494,70 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/dynamic.io.js</url>
-          <line>28</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/test/dynamic.io.js</url>
+          <url>file://$PROJECT_DIR$/node_modules/socket.io-client/lib/index.js</url>
           <line>35</line>
-          <option name="timeStamp" value="6" />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/dynamic.io.js</url>
+          <line>40</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/index.js</url>
-          <line>77</line>
-          <option name="timeStamp" value="7" />
+          <line>229</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/index.js</url>
-          <line>73</line>
-          <option name="timeStamp" value="11" />
+          <line>111</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/test.io.js</url>
+          <line>44</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/test.io.js</url>
+          <line>7</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/test.io.js</url>
+          <line>38</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/index.js</url>
+          <line>242</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/index.js</url>
+          <line>161</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/test.io.js</url>
+          <line>39</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="mocha-javascript-test-runner">
+        <watch expression="this.nsps" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/dynamicclient.js" />
@@ -397,24 +588,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+    <entry file="file://$PROJECT_DIR$/node_modules/engine.io/lib/socket.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="277" column="4" selection-start-line="277" selection-start-column="4" selection-end-line="277" selection-end-column="4" />
+        <state relative-caret-position="193">
+          <caret line="317" column="9" selection-start-line="317" selection-start-column="9" selection-end-line="317" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/client.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io-client/lib/manager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="2" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
+        <state relative-caret-position="5505">
+          <caret line="367" column="2" selection-start-line="367" selection-start-column="2" selection-end-line="367" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/expect.js/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -425,48 +620,104 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/socket.io-client/lib/index.js">
+    <entry file="file://$PROJECT_DIR$/test/socket.io.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="35" column="9" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/namespace.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="190" column="45" selection-start-line="190" selection-start-column="3" selection-end-line="190" selection-end-column="45" />
+        <state relative-caret-position="-19195">
+          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="4" />
-          <folding>
-            <element signature="n#!!block;n#requestCleanupAfter#0;n#DynamicServer#0" />
-          </folding>
+        <state relative-caret-position="165">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/dynamic.io.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+        <state relative-caret-position="534">
+          <caret line="44" column="51" selection-start-line="44" selection-start-column="51" selection-end-line="44" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="15">
+            <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="277" column="4" selection-start-line="277" selection-start-column="4" selection-end-line="277" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/socket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6626">
+          <caret line="448" column="11" selection-start-line="448" selection-start-column="11" selection-end-line="448" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="282" column="19" selection-start-line="282" selection-start-column="19" selection-end-line="282" selection-end-column="19" />
+        <state relative-caret-position="3220">
+          <caret line="253" selection-start-line="253" selection-end-line="253" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io/lib/namespace.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resutl.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="112" column="14" selection-start-line="112" selection-start-column="14" selection-end-line="112" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io-client/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test.io.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="229" column="2" selection-start-line="229" selection-start-column="2" selection-end-line="229" selection-end-column="2" />
         </state>
       </provider>
     </entry>

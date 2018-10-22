@@ -42,7 +42,7 @@ describe('dynamic.io', function(){
         expect(nsp.fullname()).to.be(basename + '/first');
         --total || done();
       });
-      console.log("For comparison ", sio);
+      console.log("For comparison ", sio.fullName());
       srv.listen(function() {
         var addr = srv.address();
         basename = '//' + addr.address + ':' + addr.port;
@@ -184,7 +184,7 @@ describe('dynamic.io', function(){
       var sio = io(srv);
       var steps = 5;
       var setup = [];
-      sio.setupNamespace('/special-debug', function(nsp, match){S
+      sio.setupNamespace('/special-debug', function(nsp, match){
         setup.push('ex1:' + nsp.name);
         --steps || finish();
       });
