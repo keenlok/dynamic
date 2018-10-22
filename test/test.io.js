@@ -34,12 +34,9 @@ describe('test 1', function () {
     let sio = new io(srv, {host: true});
     let total = 1;
     let basename = '';
-
     sio.setupNamespace(/.*first/, function (nsp) {
-      var full = nsp.fullName();
-      var test = 1;
       console.log("doing something")
-      should(nsp.fullName()).equal(basename + '/first');
+      should(nsp.fullname()).equal(basename + '/first');
       --total || done();
     })
     srv.listen(function() {
@@ -48,5 +45,29 @@ describe('test 1', function () {
       console.log("Listening for ", basename);
       client(srv, '/first');
     });
-  })
+  });
+  it('should allow getHost override', function(done){
+    var srv = http();
+    var sio = io(srv, { host: true });
+    var total = 2;
+    var basename = '';
+    // Override getHost to strip port.
+    sio.getHost = function(conn) {
+      return conn.request.headers.host.replace(/:\d+$/, '');
+    }
+    sio.setupNamespace(/.*first/, function(nsp) {
+      should(nsp.fullname()).equal(basename + '/first');
+      --total || done();
+    });
+    sio.setupNamespace(/.*second/, function(nsp) {
+      should(nsp.fullname()).equal('//localhost/second');
+      --total || done();
+    });
+    srv.listen(function() {
+      var addr = srv.address();
+      basename = '//' + addr.address;
+      client(srv, '/first');
+      client('http://localhost:' + addr.port + '/second');
+    });
+  });
 })

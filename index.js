@@ -438,7 +438,7 @@ class DynamicNamespace extends IONameSpace {
    *
    * @returns {string}
    */
-  fullName () {
+  fullname () {
     return fullNamespaceName(this.name, this.host);
   }
 
