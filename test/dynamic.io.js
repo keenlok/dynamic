@@ -1,6 +1,7 @@
 var should = require('should');
 var http = require('http').Server;
-var io = require('..').DynamicServer;
+var io = require('../index').DynamicServer;
+var socket = require('../index').DynamicSocket;
 var ioc = require('socket.io-client');
 
 // creates a socket.io client for the given server

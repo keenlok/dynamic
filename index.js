@@ -7,6 +7,7 @@ let IONameSpace = require('socket.io/lib/namespace');
 let parser = require('socket.io-parser');
 let Adapter = require('socket.io-adapter');
 let debug = require('debug')('dynamic.io');
+let expandIpv6Address = require("./ipv6");
 
 /**
  * Concatenate host and name for the full namespace name.
@@ -42,12 +43,30 @@ function matchPattern(pattern, string) {
   }
 }
 
-
+/**
+ * Extends an Ipv6 address from :: to 0:0:0:0:0:0:0:0
+ * @param string
+ * @returns {*}
+ */
 function extendAddress (string) {
-  if (string.includes("::")) {
-    string = string.replace("::", "0:0:0:0:0:0:0:0");
-    return string;
+  // console.log("The string for extending is", string);
+  if (string === '::') {
+    return expandIpv6Address(string);
   }
+  if (!string.startsWith("localhost")) {
+    let arr = string.split(':');
+    let portNumber = arr.pop();
+    let addr = '';
+    for (let i = 0; i < arr.length; i++) {
+      if (i === arr.length - 1) {
+        addr = addr + arr[i];
+      } else {
+        addr = addr + ':' + arr[i];
+      }
+    }
+    return expandIpv6Address(addr) + ':' + portNumber;
+  }
+  return string;
 }
 
 /**
