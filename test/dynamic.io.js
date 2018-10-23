@@ -265,54 +265,55 @@ describe('dynamic.io', function () {
       var sio = io(srv, {retirement: 1});
       var steps = 7;
       var setup = [];
+      var count = 1;
       sio.setupNamespace(/^\/dyn\/.*$/, function (nsp, match) {
         setup.push('setup:' + nsp.name);
-        console.log("setup:"+nsp.name)
+        console.log("setup:"+nsp.name + " "+ count++);
         --steps || finish();
         nsp.on('connect', function (socket) {
           // console.log("What is socket", socket);
           setup.push('sconn:' + nsp.name);
-          console.log("sconn:"+nsp.name)
+          console.log("sconn:"+nsp.name + " "+ count++);
           --steps || finish();
-          console.log("what listeners does socket have before", socket.listeners('disconnect'));
+          // console.log("what listeners does socket have before", socket.listeners('disconnect'));
           socket.on('disconnect', function (reason) {
             console.log(reason);
             setup.push('disc:' + nsp.name);
-            console.log("disc:"+nsp.name)
+            console.log("disc:"+nsp.name + " "+ count++);
             --steps || finish();
           });
-          console.warn("what listeners does this socket "+socket.nsp.name +" "+socket.id+" have", socket.listeners('disconnect'));
+          // console.warn("what listeners does this socket "+socket.nsp.name +" "+socket.id+" have", socket.listeners('disconnect'));
         });
         nsp.expire(function () {
           setup.push('exp:' + nsp.name);
-          console.log("push exp:"+nsp.name)
+          console.log("push exp:"+nsp.name+ " "+ count++);
           --steps || finish();
         });
       });
       sio.of('/permanent').on('connect', function (socket) {
         setup.push('sconn:/permanent');
-        console.log("sconn:/permanent");
+        console.log("sconn:/permanent"+ " "+ count++);
         --steps || finish();
-        console.warn("Socket name", socket.nsp.name, socket.id, socket.listeners('disconnect'));
+        // console.warn("Socket name", socket.nsp.name, socket.id, socket.listeners('disconnect'));
       });
       srv.listen(function () {
         var c1 = client(srv, '/dyn/fleeting');
         c1.on('connect', function () {
           setup.push('conn:/dyn/fleeting');
-          console.log("conn:/dyn/fleeting");
+          console.log("conn:/dyn/fleeting"+ " "+ count++);
           --steps || finish();
           var c2 = client(srv, '/permanent');
           c2.on('connect', function () {
             setup.push('conn:/permanent');
-            console.log("conn:/permanent");
+            console.log("conn:/permanent"+ " "+ count++);
             --steps || finish();
-            console.warn("what are these before disconnect", c2);
-            console.log(c1);
+            // console.warn("what are these before disconnect", c2);
+            // console.log(c1);
             c2.disconnect();
             c1.disconnect();
-            console.log("what are these before disconnect", c2);
-            console.warn(c1);
-            console.log(this.listeners('disconnect'));
+            // console.log("what are these before disconnect", c2);
+            // console.warn(c1);
+            // console.log(this.listeners('disconnect'));
           });
         });
       });
