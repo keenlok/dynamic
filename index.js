@@ -36,7 +36,9 @@ function matchPattern(pattern, string) {
   if (pattern instanceof RegExp) {
     // if (string)
     let result = pattern.exec(string);
-    console.log("Is there a match?", pattern, string, result);
+    // console.log("Is there a match?", pattern)
+    // console.log("string: ", string)
+    // console.log("result: ", result);
     return pattern.exec(string);
   } else {
     return pattern == string ? {'0': string, index: 0, input: string} : null;
