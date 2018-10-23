@@ -33,9 +33,20 @@ function makePattern(pattern) {
 
 function matchPattern(pattern, string) {
   if (pattern instanceof RegExp) {
+    // if (string)
+    let result = pattern.exec(string);
+    console.log("Is there a match?", pattern, string, result);
     return pattern.exec(string);
   } else {
     return pattern == string ? {'0': string, index: 0, input: string} : null;
+  }
+}
+
+
+function extendAddress (string) {
+  if (string.includes("::")) {
+    string = string.replace("::", "0:0:0:0:0:0:0:0");
+    return string;
   }
 }
 
@@ -110,7 +121,7 @@ DynamicServer.prototype.setupNamespace =  function (name, fn) {
 
 DynamicServer.prototype.onconnection = function (conn) {
   let host = this.getHost(conn);
-  if (!host || matchPattern(this._mainHost, host)) {
+  if (!host || matchPattern(this._mainHost, extendAddress(host))) {
     host = null;
   }
   let client = new DynamicClient(this, conn, host);
@@ -467,6 +478,8 @@ class DynamicNamespace extends IONameSpace {
   }
 
 }
+
+
 
 exports.DynamicServer = DynamicServer;
 exports.DynamicClient = DynamicClient;
