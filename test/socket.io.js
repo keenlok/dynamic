@@ -1,6 +1,6 @@
 
 var http = require('http').Server;
-var io = require('..');
+var io = require('..').DynamicServer;
 var fs = require('fs');
 var join = require('path').join;
 var ioc = require('socket.io-client');
@@ -15,6 +15,11 @@ function client(srv, nsp, opts){
   }
   var addr = srv.address();
   if (!addr) addr = srv.listen().address();
+  // Adding the brackets so that when the client parses the address, the port will
+  // be separated --> see socket.op-client parse id
+  if (addr.address === "::") {
+    addr.address = '['+addr.address+']';
+  }
   var url = 'ws://' + addr.address + ':' + addr.port + (nsp || '');
   return ioc(url, opts);
 }
@@ -84,6 +89,7 @@ describe('base socket.io', function(){
         expect().fail();
       });
       socket.on('error', function(err) {
+        console.log(err);
         expect(err).to.be('Not authorized');
         done();
       });

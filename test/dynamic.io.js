@@ -282,6 +282,10 @@ describe('dynamic.io', function () {
             console.log("disc:"+nsp.name + " "+ count++);
             --steps || finish();
           });
+          console.warn(socket);
+          // socket.on('reconnect_attempt', (reason) => {
+          //   console.log("reconnecting", reason);
+          // })
           // console.warn("what listeners does this socket "+socket.nsp.name +" "+socket.id+" have", socket.listeners('disconnect'));
         });
         nsp.expire(function () {
@@ -309,11 +313,11 @@ describe('dynamic.io', function () {
             --steps || finish();
             // console.warn("what are these before disconnect", c2);
             // console.log(c1);
-            c2.disconnect();
-            c1.disconnect();
+            c2.close();
+            c1.close();
             // console.log("what are these before disconnect", c2);
             // console.warn(c1);
-            // console.log(this.listeners('disconnect'));
+            console.log(sio.listeners('disconnect'));
           });
         });
       });
