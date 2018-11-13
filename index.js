@@ -401,15 +401,10 @@ util.inherits(DynamicClient, IOClient);
  * Add hostname to namespace even if it doesn't exists yet.
  * @param name
  */
-DynamicClient.prototype.connect = function (name) {
-  debug('connecting to namespace %s (%s)', name, this.host);
+DynamicClient.prototype.doConnect = function (name, query) {
   var nsp = this.server.of(name, this.host, true);
   if (nsp == null) {
-    this.packet({
-      type: parser.ERROR,
-      nsp: name,
-      data: 'Invalid namespace'
-    });
+    this.packet({ type: parser.ERROR, nsp: name, data : 'Invalid namespace'});
     return;
   }
   if (name != '/' && !this.nsps['/']) {
@@ -417,8 +412,8 @@ DynamicClient.prototype.connect = function (name) {
     return;
   }
   var self = this;
-  var socket = nsp.add(this, function() {
-    self.sockets.push(socket);
+  var socket = nsp.add(this, query, function() {
+    self.sockets[socket.id] = socket;
     debug('client %s adding socket as self.nsps[%s]', self.id, name);
     self.nsps[name] = socket;
     if (name == '/' && self.connectBuffer.length > 0) {
@@ -426,7 +421,7 @@ DynamicClient.prototype.connect = function (name) {
       self.connectBuffer = [];
     }
   });
-}
+};
 
 
 /**
@@ -511,7 +506,7 @@ DynamicNamespace.prototype._expiration = function() {
  *
  * @returns {*}
  */
-DynamicNamespace.prototype.add = function () {
+DynamicNamespace.prototype.add = function (client, query, fn) {
   this._expirationTime = Infinity;
   return IONameSpace.prototype.add.apply(this, arguments);
 }
