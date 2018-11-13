@@ -40,7 +40,7 @@ dynamicSrv.set('authorization', function(o, f) { f(null, true); });
 dynamicSrv.on('connect', s => {
   console.log("Connected to client", s.client.id);
   console.log(s.constructor.name, s.client.constructor.name);
-  console.log(s.nsp.constructor.name, s.nsp.fns.toString());
+  // console.log(s.client.sockets);
 
   s.on('yoyo', data => {
     console.log("receiving data ", data);

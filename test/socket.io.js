@@ -254,7 +254,7 @@ describe('base socket.io', function(){
        .query({ transport: 'polling' })
        .end(function (err, res) {
          // console.log(err);
-          expect(res.status).to.be(403); // Originally 400
+          expect(res.status).to.be(400); // Originally 400
           done();
         });
     });
@@ -266,7 +266,7 @@ describe('base socket.io', function(){
        .set('origin', 'http://herp.derp')
        .end(function (err, res) {
          console.log(err);
-         expect(res.status).to.be(403); //Originally 400, are these supposed to client side errors?
+         expect(res.status).to.be(400); //Originally 400, are these supposed to client side errors?
           done();
        });
     });
@@ -1000,8 +1000,8 @@ describe('base socket.io', function(){
       var srv = http();
       var sio = io(srv);
       srv.listen(function() {
-        var addr = srv.listen().address();
-        var url = 'ws://' + addr.address + ':' + addr.port + '?key1=1&key2=2';
+        var addr = srv.address();
+        var url = 'ws://[' + addr.address + ']:' + addr.port + '?key1=1&key2=2';
         var socket = ioc(url);
         sio.on('connection', function(s) {
           var parsed = require('url').parse(s.request.url);
@@ -1329,15 +1329,15 @@ describe('base socket.io', function(){
         var socket = client(srv);
         sio.on('connection', function(s){
           s.join('a', function(){
-            expect(s.rooms).to.eql([s.id, 'a']);
+            expect(Object.keys(s.rooms)).to.eql([s.id, 'a']);
             s.join('b', function(){
-              expect(s.rooms).to.eql([s.id, 'a', 'b']);
+              expect(Object.keys(s.rooms)).to.eql([s.id, 'a', 'b']);
               s.join( 'c', function(){
-                expect(s.rooms).to.eql([s.id, 'a', 'b', 'c']);
+                expect(Object.keys(s.rooms)).to.eql([s.id, 'a', 'b', 'c']);
                 s.leave('b', function(){
-                  expect(s.rooms).to.eql([s.id, 'a', 'c']);
+                  expect(Object.keys(s.rooms)).to.eql([s.id, 'a', 'c']);
                   s.leaveAll();
-                  expect(s.rooms).to.eql([]);
+                  expect(Object.keys(s.rooms)).to.eql([]);
                   done();
                 });
               });
@@ -1367,7 +1367,7 @@ describe('base socket.io', function(){
   });
 
   describe('middleware', function(done){
-    var Socket = io.DynamicSocket;
+    var Socket = require('..').DynamicSocket;
 
     it('should call functions', function(done){
       var srv = http();
@@ -1478,27 +1478,32 @@ describe('base socket.io', function(){
       var srv = http();
       var sio = io(srv);
       var result = [];
-
+      var count = 1;
       sio.use(function(socket, next) {
         result.push(1);
+        console.log(1, count++);
         setTimeout(next, 50);
       });
       sio.use(function(socket, next) {
         result.push(2);
+        console.log(2, count++);
         setTimeout(next, 50);
       });
       sio.of('/chat').use(function(socket, next) {
         result.push(3);
+        console.log(3, count++);
         setTimeout(next, 50);
       });
       sio.of('/chat').use(function(socket, next) {
         result.push(4);
+        console.log(4, count++);
         setTimeout(next, 50);
       });
 
       srv.listen(function() {
         var chat = client(srv, '/chat');
         chat.on('connect', function() {
+          console.log(result);
           expect(result).to.eql([1, 2, 3, 4]);
           done();
         });

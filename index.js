@@ -449,7 +449,7 @@ util.inherits(DynamicNamespace, IONameSpace);
  * @param socket
  */
 DynamicNamespace.prototype.remove = function (socket) {
-  IONameSpace.prototype.remove.apply(this, socket);
+  IONameSpace.prototype.remove.apply(this, arguments);
   if (!this.sockets.length) {
     this._expirationTime = +(new Date) + this.retirement;
     this.server.requestCleanupAfter(this.retirement);

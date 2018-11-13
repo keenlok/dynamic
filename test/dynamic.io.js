@@ -23,10 +23,8 @@ function client(srv, nsp, opts){
     }
     if (!addr) addr = srv.listen().address();
     url = 'ws://' + addr.address + ':' + addr.port + (nsp || '');
-    // console.log("the srv url is", url);
   }
   let clien = ioc(url, opts);
-  // console.log("what is the ioclient", clien);
   return clien;
 }
 
@@ -38,6 +36,7 @@ describe('dynamic.io', function () {
       let total = 1;
       let basename = '';
       sio.setupNamespace(/.*first/, function (nsp) {
+        console.log(nsp)
         expect(nsp.fullname()).to.be(basename + '/first');
         --total || done();
       })
