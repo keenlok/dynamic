@@ -24,6 +24,7 @@ function client(srv, nsp, opts){
     if (!addr) addr = srv.listen().address();
     url = 'ws://' + addr.address + ':' + addr.port + (nsp || '');
   }
+  console.log(url);
   let clien = ioc(url, opts);
   return clien;
 }
@@ -36,13 +37,14 @@ describe('dynamic.io', function () {
       let total = 1;
       let basename = '';
       sio.setupNamespace(/.*first/, function (nsp) {
-        console.log(nsp)
+        console.log("It comes here", nsp.fullname());
         expect(nsp.fullname()).to.be(basename + '/first');
         --total || done();
       })
       srv.listen(function() {
         var addr = srv.address();
         basename = '//' + addr.address + ':' + addr.port;
+        console.log(basename);
         client(srv, '/first');
       });
     });

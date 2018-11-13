@@ -171,7 +171,6 @@ DynamicServer.prototype.initializeNamespace = function (name, host, auto) {
   var match;
 
   if (this._namespaceNames.hasOwnProperty(fullName)) {
-    // && this._namespaceNames.hasOwnProperty(fullName)) {
     setup = this._namespaceNames[fullName];
     match = {
       '0': fullName,
@@ -401,12 +400,21 @@ util.inherits(DynamicClient, IOClient);
  * Add hostname to namespace even if it doesn't exists yet.
  * @param name
  */
-DynamicClient.prototype.doConnect = function (name, query) {
+DynamicClient.prototype.connect = function (name, query) {
   var nsp = this.server.of(name, this.host, true);
   if (nsp == null) {
     this.packet({ type: parser.ERROR, nsp: name, data : 'Invalid namespace'});
     return;
   }
+//   else {
+//     this.doConnect(name, query);
+//   }
+//
+// }
+//
+// DynamicClient.prototype.doConnect = function (name, query) {
+//   var nsp = this.server.of(name, this.host, true);
+
   if (name != '/' && !this.nsps['/']) {
     this.connectBuffer.push(name);
     return;
