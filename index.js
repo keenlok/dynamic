@@ -8,37 +8,24 @@ var parser = require('socket.io-parser');
 var Adapter = require('socket.io-adapter');
 var debug = require('debug')('dynamic.io');
 var expandIpv6Address = require("./ipv6");
+var exports = DynamicServer;
 
 /**
  * Concatenate host and name for the full namespace name.
- * @param name
- * @param host
- * @returns {string}
  */
 function fullNamespaceName(name, host) {
   return host == null ? name : '//' + host + name;
 }
 
 function makePattern(pattern) {
-  if (pattern === true) {
-    return new RegExp('.^');
-  }
-  if (pattern === '*') {
-    return new RegExp('.*');
-  }
-  if (pattern instanceof RegExp) {
-    return pattern;
-  }
+  if (pattern === true) return new RegExp('.^');
+  if (pattern === '*') return new RegExp('.*');
+  if (pattern instanceof RegExp) return pattern;
   return pattern;
 }
 
 function matchPattern(pattern, string) {
   if (pattern instanceof RegExp) {
-    // if (string)
-    // var result = pattern.exec(string);
-    // // console.log("Is there a match?", pattern)
-    // // console.log("string: ", string)
-    // console.log("result: ", result);
     return pattern.exec(string);
   } else {
     return pattern == string ? {'0': string, index: 0, input: string} : null;
@@ -51,7 +38,6 @@ function matchPattern(pattern, string) {
  * @returns {*}
  */
 function extendAddress (string) {
-  // console.log("The string for extending is", string);
   if (string === '::') {
     return expandIpv6Address(string);
   }
@@ -76,7 +62,6 @@ function extendAddress (string) {
 
 function isIpv4(string) {
   var ipv4RegEx = new RegExp(/(^\s*((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))\s*$)/);
-  // console.log(ipv4RegEx.test(string));
   return ipv4RegEx.test(string);
 }
 
@@ -116,7 +101,7 @@ function DynamicServer (server, options) {
 }
 
 util.inherits(DynamicServer, IOServer);
-
+exports.DynamicServer = DynamicServer;
 
 /**
  * This is the setup for initializing dynamic namespaces.
@@ -172,16 +157,12 @@ DynamicServer.prototype.initializeNamespace = function (name, host, auto) {
 
   if (this._namespaceNames.hasOwnProperty(fullName)) {
     setup = this._namespaceNames[fullName];
-    match = {
-      '0': fullName,
-      index: 0,
-      input: fullName
-    };
+    match = {'0': fullName, index: 0, input: fullName};
   } else {
-    for (var i = this._namespacePatterns.length - 1; i >= 0; --i) {
-      match = matchPattern(this._namespacePatterns[i].pattern, fullName);
+    for (var j = this._namespacePatterns.length - 1; j >= 0; --j) {
+      match = matchPattern(this._namespacePatterns[j].pattern, fullName);
       if (match) {
-        setup = this._namespacePatterns[i].setup;
+        setup = this._namespacePatterns[j].setup;
         break;
       }
     }
@@ -395,6 +376,7 @@ DynamicClient = function (server, conn, host) {
 }
 
 util.inherits(DynamicClient, IOClient);
+exports.DynamicClient = DynamicClient;
 
 /**
  * Add hostname to namespace even if it doesn't exists yet.
@@ -406,15 +388,6 @@ DynamicClient.prototype.connect = function (name, query) {
     this.packet({ type: parser.ERROR, nsp: name, data : 'Invalid namespace'});
     return;
   }
-//   else {
-//     this.doConnect(name, query);
-//   }
-//
-// }
-//
-// DynamicClient.prototype.doConnect = function (name, query) {
-//   var nsp = this.server.of(name, this.host, true);
-
   if (name != '/' && !this.nsps['/']) {
     this.connectBuffer.push(name);
     return;
@@ -449,6 +422,7 @@ DynamicNamespace = function (server, name, host) {
 }
 
 util.inherits(DynamicNamespace, IONameSpace);
+exports.DynamicNamespace = DynamicNamespace;
 
 /**
  * Calls the Socket.io remove, which removes a client. Called by each `Socket`.
@@ -488,8 +462,6 @@ DynamicNamespace.prototype.expire = function (callback) {
 
 /**
  * Concatenate host and name for the full namespace name.
- *
- * @returns {string}
  */
 DynamicNamespace.prototype.fullname = function () {
   return fullNamespaceName(this.name, this.host);
@@ -497,8 +469,6 @@ DynamicNamespace.prototype.fullname = function () {
 
 /**
  * If there are no sockets, the namespace will expire after the _expirationTime
- *
- * @returns {number}
  * @private
  */
 DynamicNamespace.prototype._expiration = function() {
@@ -512,19 +482,13 @@ DynamicNamespace.prototype._expiration = function() {
  * When socket is added, dynamic namespace not in retirement and won't expire.
  *  _expirationTime reset to infinity. Also adds a client to the namespace.
  *
- * @returns {*}
+ * Arguments should include client, query, and fn.
  */
-DynamicNamespace.prototype.add = function (client, query, fn) {
+DynamicNamespace.prototype.add = function () {
   this._expirationTime = Infinity;
   return IONameSpace.prototype.add.apply(this, arguments);
 }
 
-
-
-
-exports.DynamicServer = DynamicServer;
-exports.DynamicClient = DynamicClient;
-exports.DynamicNamespace = DynamicNamespace;
 exports.DynamicSocket = IOSocket;
 
 module.exports = exports;

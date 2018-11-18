@@ -18,7 +18,7 @@
   "scripts": {
     "tests": "node_modules/.bin/mocha --reporter spec --slow 200ms --bail",
     "build": "rm -rf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,ageon,debug.log --copy-files",
-    "debug": "npm run build && DEBUG=dynamic.io* node_modules/.bin/mocha --reporter spec --slow 200ms --bail test/dynamic.io.js"
+    "debug": "npm run build && DEBUG=dynamic.io* node_modules/.bin/mocha --reporter spec --slow 200ms --bail test"
   },
   "dependencies": {
     "debug": "^4.0.1",
