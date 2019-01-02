@@ -97,7 +97,6 @@ function DynamicServer (server, options) {
   this._publicStatus = options.publicStatus || false;
 
   IOServer.apply(this, arguments);
-  // console.log(this.nsps);
 }
 
 util.inherits(DynamicServer, IOServer);

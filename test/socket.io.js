@@ -1,6 +1,6 @@
 
 var http = require('http').Server;
-var io = require('..').DynamicServer;
+var io = require('..');
 var fs = require('fs');
 var join = require('path').join;
 var ioc = require('socket.io-client');
@@ -89,7 +89,6 @@ describe('base socket.io', function(){
         expect().fail();
       });
       socket.on('error', function(err) {
-        console.log(err);
         expect(err).to.be('Not authorized');
         done();
       });
@@ -102,7 +101,6 @@ describe('base socket.io', function(){
 
       srv.on('connection', function(s) {
         s.on('yoyo', function(data) {
-          console.log(data);
           expect(data).to.be('data');
           done();
         });
@@ -111,11 +109,9 @@ describe('base socket.io', function(){
       var socket = client(httpSrv);
       socket.on('connect', function(){
         socket.emit('yoyo', 'data');
-        console.log(socket.emit)
       });
 
       socket.on('error', function(err) {
-        console.log(err);
         expect().fail();
       });
     });
@@ -247,13 +243,12 @@ describe('base socket.io', function(){
 
   describe('handshake', function(){
     var request = require('superagent');
-    // Why are these errors client side errors?
-    it('should disallow request when origin defined and none specified', function(done) {
+=    it('should disallow request when origin defined and none specified', function(done) {
       var sockets = io({ origins: 'http://foo.example:*' }).listen('54013');
       request.get('http://localhost:54013/socket.io/default/')
        .query({ transport: 'polling' })
        .end(function (err, res) {
-         // console.log(err);
+         console.log(err)
           expect(res.status).to.be(400); // Originally 400
           done();
         });
@@ -265,8 +260,7 @@ describe('base socket.io', function(){
        .query({ transport: 'polling' })
        .set('origin', 'http://herp.derp')
        .end(function (err, res) {
-         console.log(err);
-         expect(res.status).to.be(400); //Originally 400, are these supposed to client side errors?
+         expect(res.status).to.be(403); //Originally 400
           done();
        });
     });
@@ -372,8 +366,8 @@ describe('base socket.io', function(){
   });
 
   describe('namespaces', function(){
-    var Socket = require('..').DynamicSocket;
-    var Namespace = require('..').DynamicNamespace;
+    var Socket = io.DynamicSocket;
+    var Namespace = io.DynamicNamespace;
 
     it('should be accessible through .sockets', function(){
       var sio = io();
@@ -622,10 +616,7 @@ describe('base socket.io', function(){
       srv.listen(function(){
         var socket = client(srv);
         sio.on('connection', function(s){
-          console.log(s);
-          console.warn(socket);
           s.on('random', function(a, b, c){
-            console.log("hello")
             expect(a).to.be(1);
             expect(b).to.be('2');
             expect(c).to.eql([3]);
@@ -1367,7 +1358,7 @@ describe('base socket.io', function(){
   });
 
   describe('middleware', function(done){
-    var Socket = require('..').DynamicSocket;
+    var Socket = io.DynamicSocket;
 
     it('should call functions', function(done){
       var srv = http();
@@ -1478,32 +1469,26 @@ describe('base socket.io', function(){
       var srv = http();
       var sio = io(srv);
       var result = [];
-      var count = 1;
       sio.use(function(socket, next) {
         result.push(1);
-        console.log(1, count++);
         setTimeout(next, 50);
       });
       sio.use(function(socket, next) {
         result.push(2);
-        console.log(2, count++);
         setTimeout(next, 50);
       });
       sio.of('/chat').use(function(socket, next) {
         result.push(3);
-        console.log(3, count++);
         setTimeout(next, 50);
       });
       sio.of('/chat').use(function(socket, next) {
         result.push(4);
-        console.log(4, count++);
         setTimeout(next, 50);
       });
 
       srv.listen(function() {
         var chat = client(srv, '/chat');
         chat.on('connect', function() {
-          console.log(result);
           expect(result).to.eql([1, 2, 3, 4]);
           done();
         });
